@@ -1,0 +1,48 @@
+#!/bin/bash
+
+## Author : Aditya Shakya
+## Email  : adi1090x@gmail.com
+
+#colors
+R='\033[1;31m'
+B='\033[1;34m'
+C='\033[0;36m'
+G='\033[1;32m'
+W='\033[1;37m'
+Y='\033[1;33m'
+
+DIR="$(pwd)"
+
+echo
+echo -e $B"   ┌───────────────────────────────────────────┐"
+echo -e $B"   │ $R  ╺┳╸┏━╸┏━┓┏┳┓╻╺┳╸┏━╸  $G ┏━┓╺┳╸╻ ╻╻  ┏━╸  $B │"
+echo -e $B"   │ $R   ┃ ┣╸ ┣┳┛┃┃┃┃ ┃ ┣╸   $G ┗━┓ ┃ ┗┳┛┃  ┣╸   $B │"
+echo -e $B"   │ $R   ╹ ┗━╸╹┗╸╹ ╹╹ ╹ ┗━╸  $G ┗━┛ ╹  ╹ ┗━╸┗━╸  $B │"
+echo -e $B"   └───────────────────────────────────────────┘"
+echo -e $B"   [$R*$B] By-$Y Aditya Shakya $R//$Y adi1090x"
+echo
+
+echo -e $G"   [*] Installing termite-style..."
+echo
+
+if [ ! -d $HOME/.config/termite ]; then
+mkdir $HOME/.config/termite
+fi
+
+sudo mkdir /usr/share/termite-style/
+sudo mkdir /usr/share/fonts/tsf/
+
+sudo cp -r $DIR/colors /usr/share/termite-style/
+sudo cp -r $DIR/fonts/* /usr/share/fonts/tsf/
+sudo cp -r $DIR/theme /usr/share/termite-style/
+
+sudo chmod +x /usr/share/termite-style/theme
+sudo fc-cache
+sudo ln -s /usr/share/termite-style/theme /usr/bin/termite-style
+
+echo -e $G"   [*] Setup Completed."
+echo
+echo -e $Y"   [*] Now You Can Run This Program By Just typing 'termite-style'."
+echo
+echo -e $G"   [*] Developed By$R Aditya Shakya."
+echo

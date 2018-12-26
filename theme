@@ -1,0 +1,1413 @@
+#!/bin/bash
+
+## Termite Styling Program
+## Author : Aditya Shakya
+
+## Directories
+PREFIX="/usr"
+TDIR="$HOME/.config/termite"
+CDIR="$PREFIX/share/termite-style/colors"
+FDIR="$PREFIX/share/termite-style/fonts"
+
+## Strings
+APLC="[*] Applying Color Scheme..."
+APLF="[*] Applying New Fonts..."
+APLD="[!] Applied Successfully."
+RES="[*] Reloading Settings..."
+REL="killall -USR1 termite"
+
+## Colors
+R='\033[1;31m'
+B='\033[1;34m'
+C='\033[0;36m'
+G='\033[1;32m'
+W='\033[1;37m'
+Y='\033[1;33m'
+
+## Banner
+clear
+echo
+echo
+echo -e $B"    ┌──────────────────────────────────────────────────────┐"
+echo -e $B"    │$R░░░▀█▀░█▀▀░█▀▄░█▄█░▀█▀░▀█▀░█▀▀░░$G░█▀▀░▀█▀░█░█░█░░░█▀▀░$B░│"
+echo -e $B"    │$R░░░░█░░█▀▀░█▀▄░█░█░░█░░░█░░█▀▀░░$G░▀▀█░░█░░░█░░█░░░█▀▀░$B░│"
+echo -e $B"    │$R░░░░▀░░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░░▀▀▀░░$G░▀▀▀░░▀░░░▀░░▀▀▀░▀▀▀░$B░│"
+echo -e $B"    └──────────────────────────────────────────────────────┘"
+echo -e $B"    [$R*$B] By-$Y Aditya Shakya $R//$Y adi1090x"
+echo
+
+## Menu
+echo
+echo -e $B"    [$R"C"$B]$G Colors"
+echo -e $B"    [$R"F"$B]$G Fonts"
+echo -e $B"    [$R"A"$B]$G About "
+echo -e $B"    [$R"Q"$B]$G Quit"
+echo
+echo -ne $B"    [$R"Select Option"$B]$B: "
+read opt
+
+if [[ $opt == "c" ]] || [[ $opt == "C" ]];
+then
+echo
+
+#**********************************************#
+# list of color schemes
+echo -e $B"        [$G"01"$B]$Y 3024-dark                  $B[$G"11"$B]$Y atelierheath-dark"
+echo -e $B"        [$G"02"$B]$Y 3024-light                 $B[$G"12"$B]$Y atelierheath-light"
+echo -e $B"        [$G"03"$B]$Y apathy-dark                $B[$G"13"$B]$Y atelierlakeside-dark"
+echo -e $B"        [$G"04"$B]$Y apathy-light               $B[$G"14"$B]$Y atelierlakeside-light"
+echo -e $B"        [$G"05"$B]$Y ashes-dark                 $B[$G"15"$B]$Y atelierseaside-dark"
+echo -e $B"        [$G"06"$B]$Y ashes-light                $B[$G"16"$B]$Y atelierseaside-light"
+echo -e $B"        [$G"07"$B]$Y atelierdune-dark           $B[$G"17"$B]$Y bespin-dark"
+echo -e $B"        [$G"08"$B]$Y atelierdune-light          $B[$G"18"$B]$Y bespin-light"
+echo -e $B"        [$G"09"$B]$Y atelierforest-dark         $B[$G"19"$B]$Y brewer-dark"
+echo -e $B"        [$G"10"$B]$Y atelierforest-light        $B[$G"20"$B]$Y brewer-light"
+echo
+echo -e $B"        [$G"21"$B]$Y bright-dark                $B[$G"31"$B]$Y eighties-dark"
+echo -e $B"        [$G"22"$B]$Y bright-light               $B[$G"32"$B]$Y eighties-light"
+echo -e $B"        [$G"23"$B]$Y chalk-dark                 $B[$G"33"$B]$Y embers-dark"
+echo -e $B"        [$G"24"$B]$Y chalk-light                $B[$G"34"$B]$Y embers-light"
+echo -e $B"        [$G"25"$B]$Y codeschool-dark            $B[$G"35"$B]$Y flat-dark"
+echo -e $B"        [$G"26"$B]$Y codeschool-light           $B[$G"36"$B]$Y flat-light"
+echo -e $B"        [$G"27"$B]$Y colors-dark                $B[$G"37"$B]$Y google-dark"
+echo -e $B"        [$G"28"$B]$Y colors-light               $B[$G"38"$B]$Y google-light"
+echo -e $B"        [$G"29"$B]$Y default-dark               $B[$G"39"$B]$Y grayscale-dark"
+echo -e $B"        [$G"30"$B]$Y default-light              $B[$G"40"$B]$Y grayscale-light"
+echo
+echo -e $B"        [$G"41"$B]$Y greenscreen-dark           $B[$G"51"$B]$Y materia"
+echo -e $B"        [$G"42"$B]$Y greenscreen-light          $B[$G"52"$B]$Y mocha-dark"
+echo -e $B"        [$G"43"$B]$Y harmonic16-dark            $B[$G"53"$B]$Y mocha-light"
+echo -e $B"        [$G"44"$B]$Y harmonic16-light           $B[$G"54"$B]$Y monokai-dark"
+echo -e $B"        [$G"45"$B]$Y isotope-dark               $B[$G"55"$B]$Y monokai-light"
+echo -e $B"        [$G"46"$B]$Y isotope-light              $B[$G"56"$B]$Y ocean-dark"
+echo -e $B"        [$G"47"$B]$Y londontube-dark            $B[$G"57"$B]$Y ocean-light"
+echo -e $B"        [$G"48"$B]$Y londontube-light           $B[$G"58"$B]$Y paraiso-dark"
+echo -e $B"        [$G"49"$B]$Y marrakesh-dark             $B[$G"59"$B]$Y paraiso-light"
+echo -e $B"        [$G"50"$B]$Y marrakesh-light            $B[$G"60"$B]$Y railscasts-dark"
+echo
+echo -e $B"        [$G"61"$B]$Y railscasts-light           $B[$G"71"$B]$Y twilight-light"
+echo -e $B"        [$G"62"$B]$Y shapeshifter-dark          $B[$G"72"$B]$Y black-on-white"
+echo -e $B"        [$G"63"$B]$Y shapeshifter-light         $B[$G"73"$B]$Y dracula"
+echo -e $B"        [$G"64"$B]$Y b16-solarized-dark         $B[$G"74"$B]$Y gnometerm"
+echo -e $B"        [$G"65"$B]$Y b16-solarized-light        $B[$G"75"$B]$Y gotham"
+echo -e $B"        [$G"66"$B]$Y summerfruit-dark           $B[$G"76"$B]$Y gruvbox-dark"
+echo -e $B"        [$G"67"$B]$Y summerfruit-light          $B[$G"77"$B]$Y gruvbox-light"
+echo -e $B"        [$G"68"$B]$Y tomorrow-dark              $B[$G"78"$B]$Y material"
+echo -e $B"        [$G"69"$B]$Y tomorrow-light             $B[$G"79"$B]$Y nancy"
+echo -e $B"        [$G"70"$B]$Y twilight-dark              $B[$G"80"$B]$Y neon"
+echo
+echo -e $B"        [$G"81"$B]$Y nord"
+echo -e $B"        [$G"82"$B]$Y rydgel"
+echo -e $B"        [$G"83"$B]$Y smyck"
+echo -e $B"        [$G"84"$B]$Y solarized-dark"
+echo -e $B"        [$G"85"$B]$Y solarized-light"
+echo -e $B"        [$G"86"$B]$Y tomorrow-night"
+echo -e $B"        [$G"87"$B]$Y white-on-black"
+echo -e $B"        [$G"88"$B]$Y wild-cherry"
+echo -e $B"        [$G"89"$B]$Y zenburn"
+echo
+echo -ne $C"    [Choose Color Scheme You Want To Apply]: "
+read cs 
+
+if [[ $cs == "1" ]] || [[ $cs == "01" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-3024-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "2" ]] || [[ $cs == "02" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-3024-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "3" ]] || [[ $cs == "03" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-apathy-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "4" ]] || [[ $cs == "04" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-apathy-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "5" ]] || [[ $cs == "05" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-ashes-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "6" ]] || [[ $cs == "06" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-ashes-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "7" ]] || [[ $cs == "07" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierdune-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "8" ]] || [[ $cs == "08" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierdune-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "9" ]] || [[ $cs == "09" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierforest-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "10" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierforest-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "11" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierheath-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "12" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierheath-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "13" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierlakeside-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "14" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierlakeside-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "15" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierseaside-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "16" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-atelierseaside-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "17" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-bespin-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "18" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-bespin-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "19" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-brewer-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "20" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-brewer-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "21" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-bright-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "22" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-bright-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "23" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-chalk-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "24" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-chalk-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "25" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-codeschool-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "26" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-codeschool-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "27" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-colors-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "28" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-colors-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "29" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-default-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "30" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-default-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "31" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-eighties-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "32" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-eighties-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "33" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-embers-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "34" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-embers-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "35" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-flat-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "36" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-flat-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "37" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-google-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "38" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-google-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "39" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-grayscale-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "40" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-grayscale-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "41" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-greenscreen-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "42" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-greenscreen-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "43" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-harmonic16-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "44" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-harmonic16-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "45" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-isotope-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "46" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-isotope-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "47" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-londontube-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "48" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-londontube-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "49" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-marrakesh-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "50" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-marrakesh-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "51" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-materia.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "52" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-mocha-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "53" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-mocha-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "54" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-monokai-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "55" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-monokai-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "56" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-ocean-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "57" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-ocean-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "58" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-paraiso-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "59" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-paraiso-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "60" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-railscasts-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "61" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-railscasts-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "62" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-shapeshifter-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "63" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-shapeshifter-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "64" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-solarized-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "65" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-solarized-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "66" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-summerfruit-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "67" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-summerfruit-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "68" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-tomorrow-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "69" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-tomorrow-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "70" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-twilight-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "71" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/base16-twilight-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "72" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/black-on-white.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "73" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/dracula.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "74" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/gnometerm.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "75" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/gotham.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "76" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/gruvbox-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "77" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/gruvbox-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "78" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/material.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "79" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/nancy.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "80" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/neon.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "81" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/nord.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "82" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/rydgel.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "83" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/smyck.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "84" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/solarized-dark.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "85" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/solarized-light.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "86" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/tomorrow-night.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "87" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/white-on-black.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "88" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/wild-cherry.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $cs == "89" ]];
+then
+echo
+echo -e $C"    $APLC"
+cp $CDIR/zenburn.config $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+## On Wrong Input
+else
+echo
+echo -e $Y"    [!] Please Choose Valid Option..."
+echo -e $G"    [*] Returning To Main Menu..."
+sleep 1
+clear
+$PREFIX/share/termite-style/theme
+echo
+exit
+fi
+
+#************************************************#
+
+elif [[ $opt == "f" ]] || [[ $opt == "F" ]];
+then
+echo
+
+#**********************************************#
+# list of available fonts
+echo -e $B"        [$G"01"$B]$Y Anonymous-Pro         $B[$G"11"$B]$Y Inconsolata"
+echo -e $B"        [$G"02"$B]$Y Courier-Prime         $B[$G"12"$B]$Y Iosevka"
+echo -e $B"        [$G"03"$B]$Y DejaVu                $B[$G"13"$B]$Y LiberationMono"
+echo -e $B"        [$G"04"$B]$Y Fantasque             $B[$G"14"$B]$Y Meslo"
+echo -e $B"        [$G"05"$B]$Y FiraCode              $B[$G"15"$B]$Y Monofur"
+echo -e $B"        [$G"06"$B]$Y Fira                  $B[$G"16"$B]$Y Monoid"
+echo -e $B"        [$G"07"$B]$Y GNU-FreeFont          $B[$G"17"$B]$Y OpenDyslexic"
+echo -e $B"        [$G"08"$B]$Y Go-font               $B[$G"18"$B]$Y Roboto"
+echo -e $B"        [$G"09"$B]$Y Hack                  $B[$G"19"$B]$Y Source-Code-Pro"
+echo -e $B"        [$G"10"$B]$Y Hermit                $B[$G"20"$B]$Y Ubuntu"
+echo
+echo -ne $C"    [Choose Font You Want To Apply]: "
+read fs
+ 
+if [[ $fs == "1" ]] || [[ $fs == "01" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = AnonymicePowerline Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "2" ]] || [[ $fs == "02" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = Courier Prime for Powerline 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "3" ]] || [[ $fs == "03" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = DejaVuSansMono Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "4" ]] || [[ $fs == "04" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = FantasqueSansMono Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "5" ]] || [[ $fs == "05" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = FuraCode Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "6" ]] || [[ $fs == "06" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = FuraMonoForPowerline Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "7" ]] || [[ $fs == "07" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = FreeMono for Powerline 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "8" ]] || [[ $fs == "08" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = Go Mono for Powerline 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "9" ]] || [[ $fs == "09" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = Knack Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "10" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = Hurmit Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "11" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = InconsolataForPowerline Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "12" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = Iosevka Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "13" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = LiterationMonoPowerline Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "14" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = MesloLGL Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "15" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = MonofurForPowerline Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "16" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = Monoid Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "17" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = OpenDyslexicMono for Powerline 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "18" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = RobotoMono Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "19" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = SauceCodePro Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+elif [[ $fs == "20" ]];
+then
+echo
+echo -e $C"    $APLF"
+sed -i -e 's/font = .*/font = UbuntuMono Nerd Font 10/g' $TDIR/config
+$REL > /dev/null
+echo -e $G"    $RES"
+echo -e $Y"    $APLD"
+echo
+exit
+
+## On Wrong Input
+else
+echo
+echo -e $Y"    [!] Please Choose Valid Option..."
+echo -e $G"    [*] Returning To Main Menu..."
+sleep 1
+clear
+$PREFIX/share/termite-style/theme
+echo
+exit
+fi
+
+#************************************************#
+
+elif [[ $opt == "a" ]] || [[ $opt == "A" ]];
+then
+echo
+echo -e $B"    ┌───────────────────────────────────────────────────────────────┐"
+echo -e $B"    │  $Y┏━┓┏┓ ┏━┓╻ ╻╺┳╸       $Y╺┳╸┏━╸┏━┓┏┳┓╻╺┳╸┏━╸   ┏━┓╺┳╸╻ ╻╻  ┏━╸  $B│"   
+echo -e $B"    │  $Y┣━┫┣┻┓┃ ┃┃ ┃ ┃    $R╹ $Y   ┃ ┣╸ ┣┳┛┃┃┃┃ ┃ ┣╸    ┗━┓ ┃ ┗┳┛┃  ┣╸   $B│"  
+echo -e $B"    │  $Y╹ ╹┗━┛┗━┛┗━┛ ╹    $R╹ $Y   ╹ ┗━╸╹┗╸╹ ╹╹ ╹ ┗━╸   ┗━┛ ╹  ╹ ┗━╸┗━╸  $B│" 
+echo -e $B"    │───────────────────────────────────────────────────────────────│"
+echo -e $B"    │                                                               │"
+echo -e $B"    │ $R>>  $G'termite-style'$B is a simple program that provides color   $B│"
+echo -e $B"    │     schemes and powerline-ready fonts to customize the        $B│"
+echo -e $B"    │     appearance of the termite terminal.                       $B│"
+echo -e $B"    │                                                               │"
+echo -e $B"    │                                                               │"
+echo -e $B"    │ $R>>$B  Author   : $G Aditya Shakya                                 $B│"
+echo -e $B"    │     Email    : $G adi1090x@gmail.com                            $B│"
+echo -e $B"    │     Github   : $G https://github.com/adi1090x                   $B│"
+echo -e $B"    │     Facebook : $G https://facebook.com/adi1090x                 $B│"
+echo -e $B"    │                                                               │"
+echo -e $B"    │───────────────────────────────────────────────────────────────│"
+echo -e $B"    │                $Y[$R"!"$Y]$R Please Do Not Copy My Work.                $B│"
+echo -e $B"    └───────────────────────────────────────────────────────────────┘"
+echo
+echo -ne $C"    [*] Press 'Enter' To Return To Main Menu."
+read enter 
+$PREFIX/share/termite-style/theme
+
+#************************************************#
+
+elif [[ $opt == "q" ]] || [[ $opt == "Q" ]];
+then
+echo
+echo -e $Y"    [*] Bye Bye, Have A Nice Day!"
+sleep 1
+exit
+
+#************************************************#
+
+## Wrong Input Action
+else
+echo
+echo -e $Y"    [!] Wrong Input..."
+echo -e $G"    [*] Try Again..."
+sleep 1
+clear
+$PREFIX/share/termite-style/theme
+echo
+fi
+
+##**********************************************##
+##												##
+##   Developed By : Aditya Shakya // adi1090x   ##
+##   Email: adi1090x@gmail.com					##
+##												##
+##**********************************************##
