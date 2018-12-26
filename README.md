@@ -47,6 +47,8 @@ And... Done, termite-style successfully installed. <br />
 
 ![preview7](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_wob.png) <br />
 
+There are total ***90 color-schemes*** including black-on-white dracula, gnometerm, gotham, gruvbox-dark, gruvbox-light, material, nancy, neon, nord, rydgel, smyck, solarized-dark, solarized-light, tomorrow-night, white-on-black, wild-cherry, zenburn, etc... <br />
+
 ## Fonts Previews
 
 ![preview1](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_1.png) <br />
@@ -61,6 +63,9 @@ And... Done, termite-style successfully installed. <br />
 
 ![preview6](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_6.png) <br />
 
+There are total ***20 Powerline Patched Fonts*** including Anonymous-Pro, Courier-Prime, DejaVu, Fantasque, FiraCode, Fira, GNU-FreeFont, Go-font, Hack, Hermit, Inconsolata, Iosevka, LiberationMono, Meslo, Monofur, Monoid, OpenDyslexic, Roboto, Source-Code-Pro, Ubuntu. <br />
+
 ### FYI
 
-This note is for people with *weak heart*, the setup file will need the **sudo** permission, because this program puts file inside the *"/usr/share"* directory. So, before asking me "why dafuq this need sudo?"... **Read The FUCKIN CODE.**
+- This note is for people with *weak heart*, the setup file will need the **sudo** permission, because this program puts file inside the *"/usr/share"* directory. So, before asking me "why dafuq this need sudo?"... **Read The FUCKIN CODE.**
+- That's All Guys... Have Fun, Enjoy.
