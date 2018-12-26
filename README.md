@@ -1,9 +1,9 @@
 # // Termite-style
 A Simple Program To Change Colors And Fonts Of Termite In Real Time. <br />
 
-**"termite-style" provides color schemes and powerline-ready fonts to customize the appearance of the Termite terminal** <br />
+**"termite-style" provides color schemes and powerline-ready fonts to customize the appearance of the Termite terminal**. <br />
 
-This Setup Contains-
+This Setup Contains -
 - 90 Amazing Color-Scheme <br />
 - 20 Powerline-Ready Fonts <br />
 
@@ -47,7 +47,7 @@ And... Done, termite-style successfully installed. <br />
 
 ![preview7](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_wob.png) <br />
 
-There are total ***90 color-schemes*** including black-on-white dracula, gnometerm, gotham, gruvbox-dark, gruvbox-light, material, nancy, neon, nord, rydgel, smyck, solarized-dark, solarized-light, tomorrow-night, white-on-black, wild-cherry, zenburn, etc... <br />
+There are total ***90 color-schemes*** including black-on-white, dracula, gnometerm, gotham, gruvbox-dark, gruvbox-light, material, nancy, neon, nord, rydgel, smyck, solarized-dark, solarized-light, tomorrow-night, white-on-black, wild-cherry, zenburn, etc... <br />
 
 ## Fonts Previews
 
