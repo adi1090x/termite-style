@@ -28,21 +28,21 @@ Here are some previews...
 ## Color Schemes Previews
 
 ![preview1](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_nord.png) <br />
-![preview2](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/preview_material.png) <br />
-![preview3](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/preview_dracula.png) <br />
-![preview4](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/preview_rydgel.png) <br />
-![preview5](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/preview_wildc.png) <br />
-![preview6](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/preview_zenburn.png) <br />
-![preview7](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/preview_wob.png) <br />
+![preview2](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_material.png) <br />
+![preview3](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_dracula.png) <br />
+![preview4](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_rydgel.png) <br />
+![preview5](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_wildc.png) <br />
+![preview6](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_zenburn.png) <br />
+![preview7](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_wob.png) <br />
 
 ## Fonts Previews
 
-![preview1](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/font_1.png) <br />
-![preview2](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/font_2.png) <br />
-![preview3](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/font_3.png) <br />
-![preview4](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/font_4.png) <br />
-![preview5](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/font_5.png) <br />
-![preview6](https://raw.githubusercontent.com/adi1090x/termite-style/tree/master/previews/font_6.png) <br />
+![preview1](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_1.png) <br />
+![preview2](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_2.png) <br />
+![preview3](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_3.png) <br />
+![preview4](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_4.png) <br />
+![preview5](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_5.png) <br />
+![preview6](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_6.png) <br />
 
 **How to use**:
 
