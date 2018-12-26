@@ -22,7 +22,14 @@ $ cd termite-style
 $ chmod +x setup
 $ ./setup
 ```
-And... Done, termite-style successfully installed. Here are some previews... <br />
+And... Done, termite-style successfully installed. <br />
+
+**How to use**:
+
+1. After successfully installed, type 'termite-style' to open the program.  <br />
+2. Select right option and go further. <br />
+3. Select color-scheme or font's option. <br />
+4. And, Done! Here are some previews... <br />
 
 ## Color Schemes Previews
 
@@ -53,13 +60,6 @@ And... Done, termite-style successfully installed. Here are some previews... <br
 ![preview5](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_5.png) <br />
 
 ![preview6](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/font_6.png) <br />
-
-**How to use**:
-
-1. After successfully installed, type 'termite-style' to open the program.  <br />
-2. Select right option and go further. <br />
-3. Select color-scheme or font's option. <br />
-4. And, Done... <br />
 
 ### FYI
 
