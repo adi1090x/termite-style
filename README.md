@@ -68,5 +68,5 @@ There are total ***20 Powerline Patched Fonts*** including Anonymous-Pro, Courie
 
 ### FYI
 
-- This note is for people with *weak heart*, the setup file will need the **sudo** permission, because this program puts file inside the *"/usr/share"* directory. So, before asking me "why dafuq this need sudo?"... **Read The FUCKIN CODE.**
+- This note is for people with *weak heart*, the setup file will need the **sudo** permission, because this program puts colors and fonts files inside the *"/usr/share"* directory. So, before asking me "why dafuq this need sudo?"... **Read The FUCKIN CODE.**
 - That's All Guys... Have Fun, Enjoy.
