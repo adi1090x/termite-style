@@ -1,4 +1,5 @@
-# // Termite-style
+![logo](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/ts-logo.png) <br />
+
 A Simple Program To Change Colors And Fonts Of Termite In Real Time. <br />
 
 **"termite-style" provides color schemes and powerline-ready fonts to customize the appearance of the Termite terminal**. <br />
