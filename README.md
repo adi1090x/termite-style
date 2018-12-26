@@ -27,7 +27,7 @@ Here are some previews...
 
 ## Color Schemes Previews
 
-![preview1](https://github.com/adi1090x/termite-style/master/previews/preview_nord.png) <br />
+![preview1](https://raw.githubusercontent.com/adi1090x/termite-style/master/previews/preview_nord.png) <br />
 ![preview2](https://github.com/adi1090x/termite-style/tree/master/previews/preview_material.png) <br />
 ![preview3](https://github.com/adi1090x/termite-style/tree/master/previews/preview_dracula.png) <br />
 ![preview4](https://github.com/adi1090x/termite-style/tree/master/previews/preview_rydgel.png) <br />
