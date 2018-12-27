@@ -29,6 +29,9 @@ if [ ! -d $HOME/.config/termite ]; then
 mkdir $HOME/.config/termite
 fi
 
+# User Config
+cp $HOME/.config/termite/config $HOME/.config/termite/config.user
+
 sudo mkdir /usr/share/termite-style/
 sudo mkdir /usr/share/fonts/tsf/
 
