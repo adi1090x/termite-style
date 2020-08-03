@@ -1,0 +1,69 @@
+[options]
+allow_bold = true
+#audible_bell = false
+#bold_is_bright = true
+#cell_height_scale = 1.0
+#cell_width_scale = 1.0
+clickable_url = true
+dynamic_title = true
+font = Iosevka 10
+#fullscreen = true
+#icon_name = terminal
+#mouse_autohide = false
+#scroll_on_output = false
+#scroll_on_keystroke = true
+# Length of the scrollback buffer, 0 disabled the scrollback buffer
+# and setting it to a negative value means "infinite scrollback"
+scrollback_lines = 10000
+#search_wrap = true
+#urgent_on_bell = true
+#hyperlinks = false
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+browser = xdg-open
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# Hide links that are no longer valid in url select overlay mode
+#filter_unmatched_urls = true
+
+# Emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+# set size hints for the window
+#size_hints = false
+
+# "off", "left" or "right"
+#scrollbar = off
+
+# ====================================
+# This part below will be replaced everytime you change colors via "termite-style"
+
+[colors]
+
+# https://git.io/nord
+foreground=#d8dee9
+background=#2e3440
+cursor=#d8dee9
+
+color0=#3b4252
+color1=#bf616a
+color2=#a3be8c
+color3=#ebcb8b
+color4=#81a1c1
+color5=#b48ead
+color6=#88c0d0
+color7=#e5e8f0
+
+color8=#4c566a
+color9=#bf616a
+color10=#a3be8c
+color11=#ebcb8b
+color12=#81a1c1
+color13=#b48ead
+color14=#8fbcbb
+color15=#eceff4

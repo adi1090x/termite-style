@@ -1,0 +1,226 @@
+#!/usr/bin/env bash
+
+## Author  : Aditya Shakya
+## Twitter : @adi1090x
+## Github  : @adi1090x
+## Reddit  : @adi1090x
+
+## A simple script to change color-schemes & fonts of termite.
+
+## ANSI Colors (FG & BG)
+RED="$(printf '\033[31m')"  GREEN="$(printf '\033[32m')"  ORANGE="$(printf '\033[33m')"  BLUE="$(printf '\033[34m')"
+MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\033[37m')" BLACK="$(printf '\033[30m')"
+REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf '\033[43m')"  BLUEBG="$(printf '\033[44m')"
+MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
+
+## Directories
+TERMITE_DIR="$HOME/.config/termite"
+COLORS_DIR='/usr/share/termite-style/colors'
+FONTS_DIR='/usr/share/fonts/termite-style'
+
+## Banner
+banner () {
+    clear
+    echo "
+    ${RED}┌──────────────────────────────────────────────────────┐
+    │░░░▀█▀░█▀▀░█▀▄░█▄█░▀█▀░▀█▀░█▀▀░░░█▀▀░▀█▀░█░█░█░░░█▀▀░░│
+    │░░░░█░░█▀▀░█▀▄░█░█░░█░░░█░░█▀▀░░░▀▀█░░█░░░█░░█░░░█▀▀░░│
+    │░░░░▀░░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░░▀▀▀░░░▀▀▀░░▀░░░▀░░▀▀▀░▀▀▀░░│
+    └──────────────────────────────────────────────────────┘
+    ${ORANGE}[*] ${CYAN}By- Aditya Shakya // adi1090x"
+}
+
+## Script Termination
+exit_on_signal_SIGINT () {
+    { printf "${RED}\n\n%s\n" "    [*] Script interrupted." 2>&1; echo; reset_color; }
+    exit 0
+}
+
+exit_on_signal_SIGTERM () {
+    { printf "${RED}\n\n%s\n" "    [*] Script terminated." 2>&1; echo; reset_color; }
+    exit 0
+}
+
+trap exit_on_signal_SIGINT SIGINT
+trap exit_on_signal_SIGTERM SIGTERM
+
+## Reset terminal colors
+reset_color() {
+	tput sgr0   # reset attributes
+	tput op     # reset color
+    return
+}
+
+## Available color-schemes & fonts
+check_files () {
+    if [[ "$1" = colors ]]; then
+        colors=($(ls $COLORS_DIR))
+        echo ${#colors[@]}
+    elif [[ "$1" = fonts ]]; then
+        fonts=($(ls $FONTS_DIR))
+        echo ${#fonts[@]}
+    fi
+    return
+}
+
+total_colors=$(check_files colors)
+total_fonts=$(check_files fonts)
+
+## Reload Settings
+reload_settings () {
+    echo "${MAGENTA}    [*] Reloading Settings..."
+    killall -USR1 termite > /dev/null
+    { echo "${CYAN}    [*] Applied Successfully."; echo; }
+    return
+}
+
+## Apply color-schemes
+apply_colors () {
+    local count=1
+
+    # List the color-schemes
+    color_schemes=($(ls $COLORS_DIR))
+    for colors in "${color_schemes[@]}"; do
+        colors_name=$(echo $colors)
+        echo ${ORANGE}"    [$count] ${colors_name%.*}"
+        count=$(($count+1))
+    done
+
+    # Read user selection
+    { echo; read -p ${GREEN}"    [Select Color Scheme (1 to $total_colors)]: ${BLUE}" answer; echo; }
+
+    # Apply color-scheme
+    if [[ (-n "$answer") && ("$answer" -le $total_colors) ]]; then
+        scheme=${color_schemes[(( answer - 1 ))]}
+        echo "${ORANGE}    [*] Applying Color Scheme..."
+        sed -i '/colors/Q' $TERMITE_DIR/config
+        cat $COLORS_DIR/$scheme >> $TERMITE_DIR/config
+        { reload_settings; reset_color; exit; }
+    else
+        echo -n "${RED}    [!] Invalid Option, Try Again."
+        { sleep 2; banner; echo; apply_colors; }
+    fi
+    return
+}
+
+## Apply fonts
+apply_fonts () {
+    local count=1
+
+    # List fonts
+    fonts_list=($(ls $FONTS_DIR))
+    for fonts in "${fonts_list[@]}"; do
+        fonts_name=$(echo $fonts)
+        echo ${ORANGE}"    [$count] ${fonts_name%.*}"
+        count=$(($count+1))
+    done
+
+    # Read user selection
+    { echo; read -p ${GREEN}"    [Select font (1 to $total_fonts)]: ${BLUE}" answer; echo; }
+
+    # Apply fonts
+    if [[ (-n "$answer") && ("$answer" -le $total_fonts) ]]; then
+        font_ttf=${fonts_list[(( answer - 1 ))]}
+        actual_font_name=$(fc-list | grep -i $font_ttf | head -n 1 | cut -d':' -f2)
+        { read -p ${GREEN}"    [Enter Font Size (Default is 10)]: ${BLUE}" font_size; echo; }
+        echo "${ORANGE}    [*] Applying Fonts..."
+        sed -i -e "s/font = .*/font = $actual_font_name ${font_size:-10}/g" $TERMITE_DIR/config
+        { reload_settings; reset_color; exit; }
+    else
+        echo -n "${RED}    [!] Invalid Option, Try Again."
+        { sleep 2; banner; echo; apply_fonts; }
+    fi
+    return
+}
+
+## Random style
+random_style () {
+    echo ${ORANGE}"    [*] Setting Random Style..."
+    random_scheme=$(ls $COLORS_DIR | shuf -n 1)
+    { sed -i '/colors/Q' $TERMITE_DIR/config; cat $COLORS_DIR/$random_scheme >> $TERMITE_DIR/config; }
+    { reload_settings; reset_color; exit; }
+}
+
+## Import files
+import_files () {
+    echo "${ORANGE}    [1] Local File (Enter path to file)
+    ${CYAN}[2] Internet File (Enter File URL)"
+    { echo; read -p ${GREEN}"    [Select Option]: ${BLUE}" option; echo; }
+
+    temp_file=$(mktemp /tmp/tstyle_XXXXXXXXXX.config)
+
+    if [[ "$option" =~ ^[1,2]$ ]]; then
+        if [[ "$option" == 1 ]]; then
+            { read -p ${GREEN}"    [Enter Path To Color-scheme]: ${BLUE}" file_path; echo; }
+            sed -i '/colors/Q' $TERMITE_DIR/config
+            cat $file_path >> $TERMITE_DIR/config
+            { reload_settings; reset_color; exit; }
+        elif [[ "$option" == 2 ]]; then
+            { read -p ${GREEN}"    [Enter Color-scheme URL]: ${BLUE}" file_link; echo; }
+            wget -o /tmp/log -O $temp_file $file_link
+            sed -i '/colors/Q' $TERMITE_DIR/config
+            cat $temp_file >> $TERMITE_DIR/config
+            { reload_settings; reset_color; exit; }
+        fi
+    else
+        echo -n "${RED}    [!] Invalid Option, Try Again."
+        { sleep 2; banner; echo; import_files; }
+    fi
+}
+
+## About program
+about_program () {
+    echo -n ${BLUE}"    ┌───────────────────────────────────────────────────────────────┐
+    │  ┏━┓┏┓ ┏━┓╻ ╻╺┳╸       ╺┳╸┏━╸┏━┓┏┳┓╻╺┳╸┏━╸   ┏━┓╺┳╸╻ ╻╻  ┏━╸  │
+    │  ┣━┫┣┻┓┃ ┃┃ ┃ ┃    ╹    ┃ ┣╸ ┣┳┛┃┃┃┃ ┃ ┣╸    ┗━┓ ┃ ┗┳┛┃  ┣╸   │
+    │  ╹ ╹┗━┛┗━┛┗━┛ ╹    ╹    ╹ ┗━╸╹┗╸╹ ╹╹ ╹ ┗━╸   ┗━┛ ╹  ╹ ┗━╸┗━╸  │
+    │───────────────────────────────────────────────────────────────│
+    │                                                               │
+    │ >>  'termite-style' is a simple program that provides color   │
+    │     schemes and powerline-ready fonts to customize the        │
+    │     appearance of the termite terminal.                       │
+    │                                                               │
+    │                                                               │
+    │ >>  Author   :  Aditya Shakya                                 │
+    │     Email    :  adi1090x@gmail.com                            │
+    │     Github   :  https://github.com/adi1090x                   │
+    │     Twitter  :  https://twitter.com/adi1090x                  │
+    │                                                               │
+    │───────────────────────────────────────────────────────────────│
+    │              GNU GENERAL PUBLIC LICENSE VERSION 3             │
+    └───────────────────────────────────────────────────────────────┘"
+    { echo; read -p ${GREEN}"    [*] Press 'Enter' To Return To Main Menu."; }
+}
+
+## Main menu
+while [[ "$REPLY" != 0 ]]; do
+    banner
+    echo "
+    ${RED}[1] Colors ($total_colors)
+    ${GREEN}[2] Fonts ($total_fonts)
+    ${ORANGE}[3] Random
+    ${BLUE}[4] Import
+    ${MAGENTA}[5] About
+    ${CYAN}[0] Quit
+    "
+
+    { read -p ${GREEN}"    [Select Option]: ${BLUE}"; echo; }
+
+    if [[ "$REPLY" =~ ^[0-5]$ ]]; then      #validate input
+        if [[ "$REPLY" == 1 ]]; then
+            apply_colors
+        elif [[ "$REPLY" == 2 ]]; then
+            apply_fonts
+        elif [[ "$REPLY" == 3 ]]; then
+            random_style
+        elif [[ "$REPLY" == 4 ]]; then
+            import_files
+        elif [[ "$REPLY" == 5 ]]; then
+            about_program
+        fi
+    else
+        echo -n "${RED}    [!] Invalid Option, Try Again."
+        sleep 2
+    fi
+done
+{ echo "${RED}    [*] Bye Bye, Have A Nice Day!"; echo; reset_color; }

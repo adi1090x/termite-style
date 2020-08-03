@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+## Author  : Aditya Shakya
+## Twitter : @adi1090x
+## Github  : @adi1090x
+## Reddit  : @adi1090x
+
+## Termite style installer script
+
+## ANSI Colors (FG & BG)
+RED="$(printf '\033[31m')"  GREEN="$(printf '\033[32m')"  ORANGE="$(printf '\033[33m')"  BLUE="$(printf '\033[34m')"
+MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\033[37m')" BLACK="$(printf '\033[30m')"
+REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf '\033[43m')"  BLUEBG="$(printf '\033[44m')"
+MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
+
+## Directories
+DIR="$(pwd)"
+TERMITE_DIR="$HOME/.config/termite"
+
+## Banner
+banner () {
+    clear
+    echo "
+    ${RED}┌──────────────────────────────────────────────────────┐
+    │░░░▀█▀░█▀▀░█▀▄░█▄█░▀█▀░▀█▀░█▀▀░░░█▀▀░▀█▀░█░█░█░░░█▀▀░░│
+    │░░░░█░░█▀▀░█▀▄░█░█░░█░░░█░░█▀▀░░░▀▀█░░█░░░█░░█░░░█▀▀░░│
+    │░░░░▀░░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░░▀▀▀░░░▀▀▀░░▀░░░▀░░▀▀▀░▀▀▀░░│
+    └──────────────────────────────────────────────────────┘
+    ${ORANGE}[*] ${CYAN}By- Aditya Shakya // adi1090x"
+}
+
+## Script Termination
+exit_on_signal_SIGINT () {
+    { printf "${RED}\n\n%s\n" "    [*] Script interrupted." 2>&1; echo; reset_color; }
+    exit 0
+}
+
+exit_on_signal_SIGTERM () {
+    { printf "${RED}\n\n%s\n" "    [*] Script terminated." 2>&1; echo; reset_color; }
+    exit 0
+}
+
+trap exit_on_signal_SIGINT SIGINT
+trap exit_on_signal_SIGTERM SIGTERM
+
+## Reset terminal colors
+reset_color() {
+	tput sgr0   # reset attributes
+	tput op     # reset color
+    return
+}
+
+## Prerequisite
+prerequisite() {
+    dependencies=(termite sed wget)
+    for dependency in "${dependencies[@]}"; do
+        type -p "$dependency" &>/dev/null || {
+			banner
+            { echo; echo ${RED}"    [!] ERROR: Could not find ${MAGENTA}'${dependency}'${RED}, is it installed?" >&2; echo; }
+            { reset_color; exit 1; }
+        }
+    done
+}
+
+## Check for previous installation
+check_prev () {
+	banner
+	if [[ (-L /usr/bin/termite-style) && (-d /usr/share/termite-style) ]]; then
+		{ echo; echo ${GREEN}"    [!] ${MAGENTA}termite-style ${GREEN}is already installed."; }
+		{ read -p ${ORANGE}"    [?] Do you wanna re-install it? (y/n): "; echo; }
+		if [[ "$REPLY" =~ ^[y/Y]$ ]]; then
+			install_tstyle
+		else
+			{ reset_color; exit; }
+		fi
+	else
+		{ echo; install_tstyle; }
+	fi
+}
+
+## Install termite style
+install_tstyle () {
+	echo ${ORANGE}"    [*] Installing termite-style..."
+	# Delete old files
+	if [[ (-L /usr/bin/termite-style) && (-d /usr/share/termite-style) ]]; then
+		echo ${RED}"    [*] Deleting files from previous installation..."${BLUE}
+		sudo rm -r /usr/bin/termite-style /usr/share/termite-style /usr/share/fonts/termite-style
+	fi
+	# Termite config dir
+	if [[ ! -d $TERMITE_DIR ]]; then
+		mkdir $TERMITE_DIR
+	fi
+	# User Config
+	if [[ -f $TERMITE_DIR/config ]]; then
+		mv $TERMITE_DIR/config{,.user}
+	fi
+	# Copy new config
+	cp $DIR/config $TERMITE_DIR
+	# Coping files
+	{ echo ${ORANGE}"    [*] Need 'sudo' to put files in '/usr' directory."${BLUE}; echo; }
+	{ printf "    "; sudo mkdir /usr/share/termite-style; sudo mkdir /usr/share/fonts/termite-style; }
+	{ sudo cp -r $DIR/colors /usr/share/termite-style/; sudo cp -r $DIR/fonts/* /usr/share/fonts/termite-style/; sudo cp -r $DIR/tstyle /usr/share/termite-style/; }
+	{ sudo chmod +x /usr/share/termite-style/tstyle; sudo fc-cache; sudo ln -s /usr/share/termite-style/tstyle /usr/bin/termite-style; }
+
+	# Verify files 
+	if [[ (-L /usr/bin/termite-style) && (-d /usr/share/termite-style) ]]; then
+		{ echo; echo ${GREEN}"    [*] Successfully Installed."; }
+		{ echo ${GREEN}"    [*] Now You Can Run This Program By Just typing ${MAGENTA}termite-style${GREEN}."; echo; }
+		{ reset_color; exit 0; }
+	else
+		{ echo ${RED}"    [!] Error Occured."; echo; reset_color; exit 1; }
+	fi
+}
+
+prerequisite
+check_prev
