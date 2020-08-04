@@ -51,7 +51,7 @@ uninstall_tstyle () {
 	banner
 	if [[ (-L /usr/bin/termite-style) && (-d /usr/share/termite-style) ]]; then
 		{ echo; echo ${ORANGE}"    [*] Uninstalling termite-style..."; echo; }
-		{ echo ${ORANGE}"    [*] Need 'sudo' to remove files from '/usr' dir."${BLUE}; echo; }
+		{ echo ${ORANGE}"    [*] Removing files from '/usr/share' dir."${BLUE}; }
 		{ printf "    "; sudo rm -r /usr/share/termite-style /usr/share/fonts/termite-style /usr/bin/termite-style; sudo fc-cache; }
 		# Verify files
 		if [[ (! -L /usr/bin/termite-style) && (! -d /usr/share/termite-style) ]]; then
