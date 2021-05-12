@@ -74,8 +74,8 @@ reload_settings () {
     return
 }
 
-## Apply color-schemes
-apply_colors () {
+## List color-schemes
+list_colors () {
     local count=1
 
     # List the color-schemes
@@ -85,26 +85,34 @@ apply_colors () {
         echo ${ORANGE}"    [$count] ${colors_name%.*}"
         count=$(($count+1))
     done
-
-    # Read user selection
-    { echo; read -p ${GREEN}"    [Select Color Scheme (1 to $total_colors)]: ${BLUE}" answer; echo; }
-
-    # Apply color-scheme
-    if [[ (-n "$answer") && ("$answer" -le $total_colors) ]]; then
-        scheme=${color_schemes[(( answer - 1 ))]}
-        echo "${ORANGE}    [*] Applying Color Scheme..."
-        sed -i '/colors/Q' $TERMITE_DIR/config
-        cat $COLORS_DIR/$scheme >> $TERMITE_DIR/config
-        { reload_settings; reset_color; exit; }
-    else
-        echo -n "${RED}    [!] Invalid Option, Try Again."
-        { sleep 2; banner; echo; apply_colors; }
-    fi
-    return
 }
 
-## Apply fonts
-apply_fonts () {
+## Apply color-schemes
+apply_colors () {
+    while true
+    do
+        # List available color-schemes
+        list_colors
+
+        # Read user selection
+        { echo; read -p ${GREEN}"    [Select Color Scheme (1 to $total_colors)]: ${BLUE}" answer; echo; }
+
+        # Apply color-scheme
+        if [[ (-n "$answer") && ("$answer" -le $total_colors) ]]; then
+            scheme=${color_schemes[(( answer - 1 ))]}
+            echo "${ORANGE}    [*] Applying Color Scheme..."
+            sed -i '/colors/Q' $TERMITE_DIR/config
+            cat $COLORS_DIR/$scheme >> $TERMITE_DIR/config
+            { reload_settings; reset_color; sleep 1; }
+        else
+            echo -n "${RED}    [!] Invalid Option, Try Again."
+            { sleep 2; banner; echo; apply_colors; }
+        fi
+    done
+}
+
+## List fonts
+list_fonts () {
     local count=1
 
     # List fonts
@@ -114,23 +122,31 @@ apply_fonts () {
         echo ${ORANGE}"    [$count] ${fonts_name%.*}"
         count=$(($count+1))
     done
+}
 
-    # Read user selection
-    { echo; read -p ${GREEN}"    [Select font (1 to $total_fonts)]: ${BLUE}" answer; echo; }
+## Apply fonts
+apply_fonts () {
+    while true
+    do
+        # List the available fonts
+        list_fonts
 
-    # Apply fonts
-    if [[ (-n "$answer") && ("$answer" -le $total_fonts) ]]; then
-        font_ttf=${fonts_list[(( answer - 1 ))]}
-        actual_font_name=$(fc-list | grep -i $font_ttf | head -n 1 | cut -d':' -f2)
-        { read -p ${GREEN}"    [Enter Font Size (Default is 10)]: ${BLUE}" font_size; echo; }
-        echo "${ORANGE}    [*] Applying Fonts..."
-        sed -i -e "s/font = .*/font = $actual_font_name ${font_size:-10}/g" $TERMITE_DIR/config
-        { reload_settings; reset_color; exit; }
-    else
-        echo -n "${RED}    [!] Invalid Option, Try Again."
-        { sleep 2; banner; echo; apply_fonts; }
-    fi
-    return
+        # Read user selection
+        { echo; read -p ${GREEN}"    [Select font (1 to $total_fonts)]: ${BLUE}" answer; echo; }
+
+        # Apply fonts
+        if [[ (-n "$answer") && ("$answer" -le $total_fonts) ]]; then
+            font_ttf=${fonts_list[(( answer - 1 ))]}
+            actual_font_name=$(fc-list | grep -i $font_ttf | head -n 1 | cut -d':' -f2)
+            { read -p ${GREEN}"    [Enter Font Size (Default is 10)]: ${BLUE}" font_size; echo; }
+            echo "${ORANGE}    [*] Applying Fonts..."
+            sed -i -e "s/font = .*/font = $actual_font_name ${font_size:-10}/g" $TERMITE_DIR/config
+            { reload_settings; reset_color; sleep 1; }
+        else
+            echo -n "${RED}    [!] Invalid Option, Try Again."
+            { sleep 2; banner; echo; apply_fonts; }
+        fi
+    done
 }
 
 ## Random style

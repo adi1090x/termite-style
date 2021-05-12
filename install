@@ -96,8 +96,8 @@ install_tstyle () {
 	fi
 	# Copy new config
 	cp $DIR/config $TERMITE_DIR
-	# Coping files
-	{ echo ${ORANGE}"    [*] Coping files in '/usr/share' directory"${BLUE}; }
+	# Copying files
+	{ echo ${ORANGE}"    [*] Copying files in '/usr/share' directory"${BLUE}; }
 	{ printf "    "; sudo mkdir /usr/share/termite-style; sudo mkdir /usr/share/fonts/termite-style; }
 	{ sudo cp -r $DIR/colors /usr/share/termite-style/; sudo cp -r $DIR/fonts/* /usr/share/fonts/termite-style/; sudo cp -r $DIR/tstyle /usr/share/termite-style/; }
 	{ sudo chmod +x /usr/share/termite-style/tstyle; sudo fc-cache; sudo ln -s /usr/share/termite-style/tstyle /usr/bin/termite-style; }
